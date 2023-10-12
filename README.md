@@ -1,6 +1,6 @@
 # Twitfix Discord Bot
 
-A simple Discord python bot that replaces Discord messages containing Twitter/X links with [FixTweet](https://github.com/FixTweet/FixTweet) embeds.
+A simple Discord python bot based on [pycord](https://github.com/Pycord-Development/pycord) API that replaces Discord messages containing Twitter/X links with [FixTweet](https://github.com/FixTweet/FixTweet) embeds.
 
 ### Features:
 - Replaces messages containing multiple links

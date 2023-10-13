@@ -14,13 +14,13 @@ bot = discord.Bot(
 
 def parse_message(message):
     content = message.content
-    if not (matches := [x for x in re.finditer(regex, content)]): return
+    if not (matches := list(re.finditer(regex, content))): return
 
     for match in matches:
         content = content[:match.start()] + f"https://fixupx.com/{match.group(1)}/status/{match.group(2)}" + content[match.end():]
 
-    # if link(s) are not the only thing in the message, parse message to quote paragraphs.
-    if len(content) > matches[len(matches) - 1].end() - matches[0].start():
+    # If message is not a link resent as quote
+    if len(content) > matches[0].end() - matches[0].start():
         content = "".join([ f"\n> {paragraph}" if paragraph != "" else "\n" for paragraph in content.split("\n") ])
         content = f"## {message.author.mention}:speech_balloon: \n" + content
     else:

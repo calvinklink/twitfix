@@ -20,7 +20,7 @@ def parse_message(message):
         content = content[:match.start()] + f"https://fixupx.com/{match.group(1)}/status/{match.group(2)}" + content[match.end():]
 
     # if link(s) are not the only thing in the message, parse message to quote paragraphs.
-    if len(matches) > 1 and len(content) > matches[len(matches) - 1].end() - matches[0].start():
+    if len(content) > matches[len(matches) - 1].end() - matches[0].start():
         content = "".join([ f"\n> {paragraph}" if paragraph != "" else "\n" for paragraph in content.split("\n") ])
         content = f"## {message.author.mention}:speech_balloon: \n" + content
     else:

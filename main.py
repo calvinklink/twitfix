@@ -14,18 +14,19 @@ bot = discord.Bot(
 
 def parse_message(message):
     content = message.content
-    match = re.search(regex, content)
-    if not match: return
+    if not (matches := [x for x in re.finditer(regex, content)]): return
 
-    replacement_message = content[:match.start()] + f"https://fixupx.com/{match.group(1)}/status/{match.group(2)}" + content[match.end():]
+    for match in matches:
+        content = content[:match.start()] + f"https://fixupx.com/{match.group(1)}/status/{match.group(2)}" + content[match.end():]
 
-    if len(content) > match.end() - match.start(): # if link is not the only thing in the message, parse message to quote paragraphs.
-        replacement_message = "".join([ f"\n> {paragraph}" if paragraph != "" else "\n" for paragraph in replacement_message.split("\n") ])
-        replacement_message = f"## {message.author.mention}:speech_balloon: \n" + replacement_message
+    # if link(s) are not the only thing in the message, parse message to quote paragraphs.
+    if len(matches) > 1 and len(content) > matches[len(matches) - 1].end() - matches[0].start():
+        content = "".join([ f"\n> {paragraph}" if paragraph != "" else "\n" for paragraph in content.split("\n") ])
+        content = f"## {message.author.mention}:speech_balloon: \n" + content
     else:
-        replacement_message = f"## {message.author.mention}\n" + replacement_message
+        content = f"## {message.author.mention}\n" + content
 
-    return replacement_message
+    return content
 
 @bot.event
 async def on_ready():

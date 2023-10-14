@@ -3,6 +3,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 
 regex = '(?:https://)(?:twitter.com|x.com)/(\w+)/status/(\d+)(?:\?(t|s|fbclid)=\w+)?(?:&s=[0-9]+)?'
+urlRegex = '(twitter.com|x.com)'
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -29,7 +30,7 @@ async def on_message(message: discord.Message):
 
         for _ in re.split('(\s)', message.content):
             if y := re.match(regex, _):
-                msg.append(re.sub(regex, f'https://fixupx.com/{y.group(1)}/status/{y.group(2)}', _))
+                msg.append(re.sub(urlRegex, f'fixupx.com', _))
                 print(now.strftime("%Y-%m-%d %H:%M:%S") + f": Detected: {y.group(0)}")
             else:
                 msgQuote = True

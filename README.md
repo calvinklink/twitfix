@@ -17,4 +17,5 @@ Create a `.env` file in the `main.py` directory containing your API key:
 At the very least, this bot requires `&permissions=10240&scope=bot` (**bot** scope: **Send Messages** and **Manage Messages**)
 
 ## Screenshot Example
-![image](https://i.imgur.com/qtPvf5p.png)
+![image](https://github.com/calvinklink/twitfix/assets/73358533/c3f60efc-260b-477d-ae32-40186a0fc735)
+

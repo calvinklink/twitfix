@@ -3,7 +3,7 @@ from datetime import datetime
 from dotenv import load_dotenv
 from asyncio import get_event_loop
 
-regex = '(?:https://)(?:twitter.com|x.com)/(\w+)/status/(\d+)(?:\?(t|s|fbclid)=\w+)?(?:&s=[0-9]+)?'
+regex = '(?:https://)(?:twitter.com|x.com)/(\w+)/status/(\d+)(?:\?(t|s|fbclid)=\S+)?(?:&s=[0-9]+)?'
 
 intents = discord.Intents.default()
 intents.message_content = True

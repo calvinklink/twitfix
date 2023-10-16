@@ -14,19 +14,14 @@ bot = discord.Bot(
 
 def parse_message(message):
     content = message.content
-    if not (matches := list(re.finditer(regex, content))): return
 
-    for match in matches:
-        content = content[:match.start()] + f"https://fixupx.com/{match.group(1)}/status/{match.group(2)}" + content[match.end():]
+    replacement_message = re.sub(regex, lambda match: f'https://fixupx.com/{match.group(1)}/status/{match.group(2)}', content)
+    if (replacement_message == content): return
 
-    # If message is not a link resent as quote
-    if len(content) > matches[0].end() - matches[0].start():
-        content = "".join([ f"\n> {paragraph}" if paragraph != "" else "\n" for paragraph in content.split("\n") ])
-        content = f"## {message.author.mention}:speech_balloon: \n" + content
-    else:
-        content = f"## {message.author.mention}\n" + content
+    replacement_message = "".join([ f"\n> {paragraph}" if paragraph != "" else "\n" for paragraph in replacement_message.split("\n") ])
+    replacement_message = f"## {message.author.mention}:speech_balloon: \n" + replacement_message
 
-    return content
+    return replacement_message
 
 @bot.event
 async def on_ready():

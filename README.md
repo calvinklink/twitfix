@@ -8,6 +8,8 @@ A simple Discord python bot based on [pycord](https://github.com/Pycord-Developm
 - Strips URL tracking params
 - Fixes video embeds in Discord
 - Replaces message replies
+- Optionally configure bot on a per-server basis via slash commands and Redis.
+- View bot statistics via /info
 
 ## Running
 Install requirements `pip install -r requirements.txt`
